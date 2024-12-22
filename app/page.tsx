@@ -45,7 +45,7 @@ export default function Home() {
     e.preventDefault();
     e.stopPropagation();
 
-    (() => router.push("/result"))();
+    router.push("/result");
   };
 
   return (
