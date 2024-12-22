@@ -1,23 +1,29 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
-import { Time } from "@/app/lib/context/shared_state_context";
+import { ChangeEvent, MouseEventHandler, useState } from "react";
+import { Time } from "@/app/lib/context/timing_context";
 import { sanitizeText } from "@/app/lib/formatting";
 
 function HoursMinutesSeconds({
   time,
   legend,
   callback,
+  rememberCallback,
 }: {
   time: Time;
   legend: string;
   callback: (update: Time) => void;
+  rememberCallback: () => void;
 }) {
   const prefix = sanitizeText(legend);
 
-  const [hours, setHours] = useState<string>(time.hours.toString());
-  const [minutes, setMinutes] = useState<string>(time.minutes.toString());
-  const [seconds, setSeconds] = useState<string>(time.seconds.toString());
+  const { hours, minutes, seconds } = time;
+
+  const [localHours, setHours] = useState<string>(hours.toString());
+
+  const [localMinutes, setMinutes] = useState<string>(minutes.toString());
+
+  const [localSeconds, setSeconds] = useState<string>(seconds.toString());
 
   const onChangeHours = (e: ChangeEvent<HTMLInputElement>): void => {
     const update = e.currentTarget.value;
@@ -36,6 +42,11 @@ function HoursMinutesSeconds({
     setSeconds(update);
     callback({ ...time, seconds: parseInt(update) });
   };
+
+  const onClickRemember: MouseEventHandler<HTMLButtonElement> = (): void => {
+    rememberCallback();
+  }
+
   return (
     <fieldset>
       <legend>{legend}</legend>
@@ -46,7 +57,7 @@ function HoursMinutesSeconds({
           type="number"
           min={0}
           max={24}
-          value={hours}
+          value={localHours}
           id={`${prefix}_hour`}
           onChange={onChangeHours}
         />
@@ -58,7 +69,7 @@ function HoursMinutesSeconds({
           type="number"
           min={0}
           max={60}
-          value={minutes}
+          value={localMinutes}
           id={`${prefix}_minutes`}
           onChange={onChangeMinutes}
         />
@@ -70,11 +81,12 @@ function HoursMinutesSeconds({
           type="number"
           min={0}
           max={60}
-          value={seconds}
+          value={localSeconds}
           id={`${prefix}_seconds`}
           onChange={onChangeSeconds}
         />
       </label>
+      <button onClick={onClickRemember}>&#x1F4CC;</button>
     </fieldset>
   );
 }

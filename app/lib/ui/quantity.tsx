@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, MouseEventHandler, useState } from "react";
 import { sanitizeText } from "@/app/lib/formatting";
 
 function Quantity({
@@ -8,11 +8,13 @@ function Quantity({
   label,
   max = 100,
   callback,
+  rememberCallback,
 }: {
   value: number;
   label: string;
   max?: number;
   callback: (update: number) => void;
+  rememberCallback: () => void;
 }) {
   const prefix = sanitizeText(label);
 
@@ -25,6 +27,10 @@ function Quantity({
     setQty(update);
     callback(parseInt(update));
   };
+
+  const onClickRemember: MouseEventHandler<HTMLButtonElement> = (): void => {
+    rememberCallback();
+  }
 
   return (
     <fieldset>
@@ -40,6 +46,7 @@ function Quantity({
           onChange={onChange}
         />
       </label>
+      <button onClick={onClickRemember}>&#x1F4CC;</button>
     </fieldset>
   );
 }
