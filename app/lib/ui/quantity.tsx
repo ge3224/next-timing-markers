@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from "react";
 import { sanitizeText } from "@/app/lib/formatting";
 
-function Qty({
+function Quantity({
   value,
   label,
   max = 100,
@@ -44,4 +44,4 @@ function Qty({
   );
 }
 
-export default Qty;
+export default Quantity;

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useCallback } from "react";
 
 import HoursMinutesSeconds from "@/app/lib/ui/hours_minutes_seconds";
-import Qty from "@/app/lib/ui/quantity";
+import Quantity from "@/app/lib/ui/quantity";
 import { Time, useTimingState } from "@/app/lib/context/shared_state_context";
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
     [conclusion, setConclusion],
   );
 
-  const onUpdateQty = useCallback(
+  const onUpdateSections = useCallback(
     (update: number): void => setSections(update),
     [sections, setSections],
   );
@@ -50,7 +50,6 @@ export default function Home() {
 
   return (
     <>
-      <header>header here</header>
       <main>
         <form onSubmit={onSubmit}>
           <HoursMinutesSeconds
@@ -63,10 +62,10 @@ export default function Home() {
             legend="Introduction"
             callback={onUpdateIntroduction}
           />
-          <Qty
+          <Quantity
             value={sections}
             label="Number of Sections"
-            callback={onUpdateQty}
+            callback={onUpdateSections}
           />
           <HoursMinutesSeconds
             time={conclusion}
@@ -76,7 +75,6 @@ export default function Home() {
           <button type="submit">Calculate</button>
         </form>
       </main>
-      <footer>footer here</footer>
     </>
   );
 }
