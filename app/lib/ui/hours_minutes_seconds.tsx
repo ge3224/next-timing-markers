@@ -1,18 +1,22 @@
 "use client";
 
-import { ChangeEvent, MouseEventHandler, useState } from "react";
+import { ChangeEvent, MouseEventHandler, MouseEvent, useState } from "react";
 import { Time } from "@/app/lib/context/timing_context";
 import { sanitizeText } from "@/app/lib/formatting";
+import IconPushPin from "@/app/lib/ui/icons/push_pin";
+import clsx from "clsx";
 
 function HoursMinutesSeconds({
   time,
   legend,
   callback,
+  isRemembered,
   rememberCallback,
 }: {
   time: Time;
   legend: string;
   callback: (update: Time) => void;
+  isRemembered: boolean;
   rememberCallback: () => void;
 }) {
   const prefix = sanitizeText(legend);
@@ -43,9 +47,13 @@ function HoursMinutesSeconds({
     callback({ ...time, seconds: parseInt(update) });
   };
 
-  const onClickRemember: MouseEventHandler<HTMLButtonElement> = (): void => {
+  const onClickRemember: MouseEventHandler<HTMLButtonElement> = (
+    e: MouseEvent<HTMLButtonElement>,
+  ): void => {
+    e.preventDefault();
+    e.stopPropagation();
     rememberCallback();
-  }
+  };
 
   return (
     <fieldset>
@@ -86,7 +94,14 @@ function HoursMinutesSeconds({
           onChange={onChangeSeconds}
         />
       </label>
-      <button onClick={onClickRemember}>&#x1F4CC;</button>
+      <button onClick={onClickRemember}>
+        <IconPushPin
+          tailwind={clsx(
+            "stroke-2",
+            isRemembered ? "stroke-neutral-500" : "stroke-neutral-500/20",
+          )}
+        />
+      </button>
     </fieldset>
   );
 }

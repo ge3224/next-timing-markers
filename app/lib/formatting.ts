@@ -8,8 +8,8 @@ export function sanitizeText(input: string): string {
 }
 
 export function formatTime(time: Time): string {
-  const hs = time.hours.toString().padStart(2, "0");
-  const ms = time.minutes.toString().padStart(2, "0");
-  const ss = time.seconds.toString().padStart(2, "0");
-  return `${hs}:${ms}:${ss}`;
+  const hh = time.hours.toFixed(0).padStart(2, "0");
+  const mm = time.minutes.toFixed(0).padStart(2, "0");
+  const ss = time.seconds.toFixed(0).padStart(2, "0");
+  return `${hh}:${mm}:${ss}`;
 }
