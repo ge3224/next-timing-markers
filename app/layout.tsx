@@ -26,13 +26,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html className="flex flex-col h-svh" lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex flex-col items-center justify-center text-neutral-800 antialiased py-8 px-4`}
       >
-        <header className="mx-auto flex w-full max-w-screen-sm flex-col items-center justify-center text-center">
-          <h1 className="font-extrabold text-4xl">PacePoints</h1>
-          <p>
+        <header className="mx-auto w-full max-w-md text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-neutral-700">
+            <a href="/">PacePoints</a>
+          </h1>
+          <p className="mt-1 text-sm md:text-base md:mt-3">
             A straightforward tool that helps you plan and track time segments
             during speaking&nbsp;engagements.
           </p>
@@ -46,7 +48,7 @@ export default function RootLayout({
               href="https://github.com/ge3224/next-timing-markers"
               target="_blank"
             >
-              <IconGithub />
+              <IconGithub twStroke="stroke-2 stroke-neutral-400" />
             </a>
           </span>
         </footer>

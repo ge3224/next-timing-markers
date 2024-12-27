@@ -146,11 +146,11 @@ export default function Home() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-screen-sm flex flex-col justify-center items-center my-12">
+    <main className="mx-auto my-4 md:my-10 flex w-full max-w-md flex-col items-center justify-center rounded border py-1 md:py-10">
       {loading ? (
         <div>loading....</div>
       ) : (
-        <form onSubmit={onSubmit}>
+        <form className="pb-6" onSubmit={onSubmit}>
           <HoursMinutesSeconds
             time={total}
             legend="Total Time"
@@ -179,7 +179,12 @@ export default function Home() {
             callback={onUpdateConclusion}
             rememberCallback={rememberConclusion}
           />
-          <button type="submit">Calculate</button>
+          <button
+            className="mx-auto mt-10 block rounded-lg bg-neutral-800 px-6 py-3 font-bold text-white transition-all duration-150 ease-in hover:bg-emerald-800 hover:px-8"
+            type="submit"
+          >
+            Calculate
+          </button>
         </form>
       )}
     </main>

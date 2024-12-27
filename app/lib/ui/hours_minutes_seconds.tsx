@@ -9,14 +9,14 @@ import clsx from "clsx";
 function HoursMinutesSeconds({
   time,
   legend,
-  callback,
   isRemembered,
+  callback,
   rememberCallback,
 }: {
   time: Time;
   legend: string;
-  callback: (update: Time) => void;
   isRemembered: boolean;
+  callback: (update: Time) => void;
   rememberCallback: () => void;
 }) {
   const prefix = sanitizeText(legend);
@@ -56,53 +56,55 @@ function HoursMinutesSeconds({
   };
 
   return (
-    <fieldset>
-      <legend>{legend}</legend>
-      <label htmlFor={`${prefix}_hour`}>
-        H:
-        <input
-          className="text-black"
-          type="number"
-          min={0}
-          max={24}
-          value={localHours}
-          id={`${prefix}_hour`}
-          onChange={onChangeHours}
-        />
-      </label>
-      <label htmlFor={`${prefix}_minutes`}>
-        M:
-        <input
-          className="text-black"
-          type="number"
-          min={0}
-          max={60}
-          value={localMinutes}
-          id={`${prefix}_minutes`}
-          onChange={onChangeMinutes}
-        />
-      </label>
-      <label htmlFor={`${prefix}_seconds`}>
-        S:
-        <input
-          className="text-black"
-          type="number"
-          min={0}
-          max={60}
-          value={localSeconds}
-          id={`${prefix}_seconds`}
-          onChange={onChangeSeconds}
-        />
-      </label>
-      <button onClick={onClickRemember}>
-        <IconPushPin
-          tailwind={clsx(
-            "stroke-2",
-            isRemembered ? "stroke-neutral-500" : "stroke-neutral-500/20",
-          )}
-        />
-      </button>
-    </fieldset>
+    <div className="my-3 md:my-6">
+      <h2 className="mb-3 font-bold text-neutral-800">{legend}</h2>
+      <div className="flex items-center gap-2 border-b border-neutral-100 pb-6">
+        <label htmlFor={`${prefix}_hour`}>
+          <span className="align-top text-xs text-neutral-500">HH</span>{" "}
+          <input
+            className="rounded border pb-2.5 pl-4 pt-2 text-xl text-neutral-900"
+            type="number"
+            min={0}
+            max={24}
+            value={localHours}
+            id={`${prefix}_hour`}
+            onChange={onChangeHours}
+          />
+        </label>
+        <label htmlFor={`${prefix}_minutes`}>
+          <span className="align-top text-xs text-neutral-500">MM</span>{" "}
+          <input
+            className="rounded border pb-2.5 pl-4 pt-2 text-xl text-neutral-900"
+            type="number"
+            min={0}
+            max={60}
+            value={localMinutes}
+            id={`${prefix}_minutes`}
+            onChange={onChangeMinutes}
+          />
+        </label>
+        <label htmlFor={`${prefix}_seconds`}>
+          <span className="align-top text-xs text-neutral-500">SS</span>{" "}
+          <input
+            className="rounded border pb-2.5 pl-4 pt-2 text-xl text-neutral-900"
+            type="number"
+            min={0}
+            max={60}
+            value={localSeconds}
+            id={`${prefix}_seconds`}
+            onChange={onChangeSeconds}
+          />
+        </label>
+        <button onClick={onClickRemember} aria-label="Remember">
+          <IconPushPin
+            twStroke={clsx(
+              "stroke-2",
+              isRemembered ? "stroke-emerald-500/60" : "stroke-neutral-500/20",
+            )}
+          />
+        </button>
+      </div>
+    </div>
   );
 }
 
