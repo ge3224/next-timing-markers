@@ -146,7 +146,7 @@ export default function Home() {
   };
 
   return (
-    <main className="mx-auto my-4 md:my-10 flex w-full max-w-md flex-col items-center justify-center rounded border py-1 md:py-10">
+    <main className="mx-auto my-4 flex w-full max-w-md flex-col items-center justify-center rounded border py-1 md:my-10 md:py-10">
       {loading ? (
         <div>loading....</div>
       ) : (

@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ReactNode,
-  createContext,
-  useCallback,
-  useContext,
-  useState,
-} from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
 
 export type Time = {
   hours: number;
@@ -14,18 +8,18 @@ export type Time = {
   seconds: number;
 };
 
-export function isTime(obj: any): obj is Time {
+export function isTime(obj: unknown): obj is Time {
   return (
     typeof obj === "object" &&
     obj !== null &&
-    typeof obj.hours === "number" &&
-    obj.hours > -1 &&
-    typeof obj.minutes === "number" &&
-    obj.minutes > -1 &&
-    obj.minutes < 61 &&
-    typeof obj.seconds === "number" &&
-    obj.seconds > -1 &&
-    obj.seconds < 61
+    typeof (obj as Time).hours === "number" &&
+    (obj as Time).hours > -1 &&
+    typeof (obj as Time).minutes === "number" &&
+    (obj as Time).minutes > -1 &&
+    (obj as Time).minutes < 61 &&
+    typeof (obj as Time).seconds === "number" &&
+    (obj as Time).seconds > -1 &&
+    (obj as Time).seconds < 61
   );
 }
 

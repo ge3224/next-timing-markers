@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { TimingProvider } from "./lib/context/timing_context";
 import IconGithub from "./lib/ui/icons/github";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="flex flex-col h-svh" lang="en">
+    <html className="flex h-svh flex-col" lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} flex flex-col items-center justify-center text-neutral-800 antialiased py-8 px-4`}
+        className={`${geistSans.variable} ${geistMono.variable} flex flex-col items-center justify-center px-4 py-8 text-neutral-800 antialiased`}
       >
         <header className="mx-auto w-full max-w-md text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-neutral-700">
-            <a href="/">PacePoints</a>
+          <h1 className="text-3xl font-bold text-neutral-700 md:text-4xl">
+            <Link href="/">PacePoints</Link>
           </h1>
-          <p className="mt-1 text-sm md:text-base md:mt-3">
+          <p className="mt-1 text-sm md:mt-3 md:text-base">
             A straightforward tool that helps you plan and track time segments
             during speaking&nbsp;engagements.
           </p>
